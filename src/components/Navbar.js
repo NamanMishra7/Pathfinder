@@ -28,6 +28,7 @@ class Navbar extends React.Component {
                         </a>
                         <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink-algo">
                             <a className="dropdown-item" onClick={() => this.props.handleAlgoSelect('dijkstra')} href="#">Dijkstra's Search</a>
+                            <a className="dropdown-item" onClick={() => this.props.handleAlgoSelect('a-star')} href="#">A* Search</a>
                         </div>
                     </li>
                     <li id="maze-select-dropdown" className="nav-item dropdown">

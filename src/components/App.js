@@ -2,9 +2,11 @@ import React from "react";
 import Navbar from "./Navbar";
 import MainGrid from "./MainGrid";
 import dijkstra from "../algorithms/dijkstra";
+import aStar from "../algorithms/astar";
 import RecursiveDivision from "../algorithms/RecursiveDivision";
+import { tab } from "@testing-library/user-event/dist/tab";
 
-const spMap = {'Fast': 10, 'Medium': 40, 'Slow': 100};
+const spMap = {'Fast': 25, 'Medium': 100, 'Slow': 200};
 
 class App extends React.Component {
     constructor(props) {
@@ -74,7 +76,7 @@ class App extends React.Component {
     handleMazeSelect(maze) {
         const table = this.state.table.slice();
         if (maze === 'RecursiveDivision')
-            RecursiveDivision(table, spMap[this.state.speed]*2);
+            RecursiveDivision(table);
     }
 
     handleAlgoSelect(func) {
@@ -126,6 +128,9 @@ class App extends React.Component {
         if (algo === 'dijkstra') {
             //console.log('dijkstra\'s search: start = (' + s_i + ', ' + s_j + ')');
             dijkstra(table, maxRow, maxCol, s_i, s_j, e_i, e_j, spMap[this.state.speed]);
+        }
+        else if (algo === 'a-star') {
+            aStar(table, maxRow, maxCol, s_i, s_j, e_i, e_j, spMap[this.state.speed]);
         }
     }
 

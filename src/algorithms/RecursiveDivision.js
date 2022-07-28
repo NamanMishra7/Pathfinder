@@ -1,10 +1,10 @@
 import visualizer from "../components/visualizer";
 
-let delay = 5;
-let speed = 5;
+let delay = 20;
+let speed = 20;
 
-function RecursiveDivision(table, given_speed) {
-    delay = speed = given_speed;
+function RecursiveDivision(table) {
+    delay = speed = 20;
     divide(table, 2, table.length-3, 2, table[0].length-3, 'vertical', false);
 }
 

@@ -6,6 +6,8 @@ const inf = 1000000000;
 let delay = 10;
 let speed = 10;
 
+let pathspeed = 50;
+
 function genPath(table, parent, x, y) {
     if (parent[x][y][0] !== -1) {
         genPath(table, parent, parent[x][y][0], parent[x][y][1]);
@@ -14,11 +16,12 @@ function genPath(table, parent, x, y) {
         return;
     }
     table[x][y].status = 'shortest-path';
-    visualizer(x, y, table[x][y].status, delay += speed*2);
+    visualizer(x, y, table[x][y].status, delay += pathspeed);
 }
 
 function dijkstra(table, maxRow, maxCol, start_i, start_j, end_i, end_j, sp) {
     delay = speed = sp;
+    pathspeed = 50;
     let dis = [];
     let parent = [];
     for (let i = 0; i < maxRow; i++) {
