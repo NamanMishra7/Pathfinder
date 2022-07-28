@@ -15,7 +15,7 @@ function divide(board, rowStart, rowEnd, colStart, colEnd, orientation, surround
     if (!surroundingWalls) {
         for (let i = 0; i < board.length; i++) {
             for (let j = 0; j < board[0].length; j++) {
-                if (i == 0 || j == 0 || i == board.length-1 || j == board[0].length-1)
+                if (i === 0 || j === 0 || i === board.length-1 || j === board[0].length-1)
                     visualizer(i, j, 'wall', delay += speed);
             }
         }
@@ -35,10 +35,10 @@ function divide(board, rowStart, rowEnd, colStart, colEnd, orientation, surround
         let currentRow = possibleRows[randomRowIndex];
         let colRandom = possibleCols[randomColIndex];
         for (let j = colStart-1; j <= colEnd+1; j++) {
-            if (j == colRandom)
+            if (j === colRandom)
                 continue;
             let curr_status = document.getElementById(`${currentRow}-${j}`).className;
-            if (curr_status == 'start' || curr_status == 'end')
+            if (curr_status === 'start' || curr_status === 'end')
                 continue;
             visualizer(currentRow, j, 'wall', delay += speed);
         }
@@ -69,10 +69,10 @@ function divide(board, rowStart, rowEnd, colStart, colEnd, orientation, surround
         let currentCol = possibleCols[randomColIndex];
         let rowRandom = possibleRows[randomRowIndex];
         for (let i = rowStart-1; i <= rowEnd+1; i++) {
-            if (i == rowRandom)
+            if (i === rowRandom)
                 continue;
             let curr_status = document.getElementById(`${i}-${currentCol}`).className;
-            if (curr_status == 'start' || curr_status == 'end')
+            if (curr_status === 'start' || curr_status === 'end')
                 continue;
             visualizer(i, currentCol, 'wall', delay += speed);
         }

@@ -64,12 +64,12 @@ class PriorityQueue {
 
     isEmpty() {
         // return true if the queue is empty.
-        return this.items.length == 0;
+        return this.items.length === 0;
     }
 
     erase(qElement) {
         for (let i = 0; i < this.items.length; i++) {
-            if (this.ietms[i].element == qElement.element) {
+            if (this.ietms[i].element === qElement.element) {
                 this.items.splice(i, 0);
             }
         }

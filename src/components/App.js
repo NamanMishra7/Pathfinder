@@ -31,7 +31,7 @@ class App extends React.Component {
     }
 
     resetBoard(type) {
-        if (type == 'reset') {
+        if (type === 'reset') {
             const table = createArray(this.state.maxRow, this.state.maxCol);
             this.setState({
                 table: table,
@@ -42,10 +42,10 @@ class App extends React.Component {
             });
             for (let i = 0; i < this.state.maxRow; i++) {
                 for (let j = 0; j < this.state.maxCol; j++) {
-                    if (i == 9 && j == 11) {
+                    if (i === 9 && j === 11) {
                         document.getElementById(`${i}-${j}`).className = 'start';
                     }
-                    else if (i == 9 && j == 49) {
+                    else if (i === 9 && j === 49) {
                         document.getElementById(`${i}-${j}`).className = 'end';
                     }
                     else {
@@ -59,7 +59,7 @@ class App extends React.Component {
             for (let i = 0; i < this.state.maxRow; i++) {
                 for (let j = 0; j < this.state.maxCol; j++) {
                     const node = document.getElementById(`${i}-${j}`).className;
-                    if (node == 'visited' || node == 'shortest-path') {
+                    if (node === 'visited' || node === 'shortest-path') {
                         document.getElementById(`${i}-${j}`).className = 'unvisited';
                         table[i][j].status = 'unvisited';
                     }
@@ -95,14 +95,14 @@ class App extends React.Component {
     handleCellClick(i, j) {
         const tmp_table = this.state.table.slice();
         const selected = this.state.selected;
-        if (selected == "start") {
+        if (selected === "start") {
             tmp_table[this.state.start_i][this.state.start_j].status = 'unvisited';
             this.setState({
                 start_i: i,
                 start_j: j,
             });
         }
-        else if (selected == "end") {
+        else if (selected === "end") {
             tmp_table[this.state.end_i][this.state.end_j].status = 'unvisited';
             this.setState({
                 end_i: i,
@@ -125,7 +125,7 @@ class App extends React.Component {
         const e_i = this.state.end_i;
         const e_j = this.state.end_j;
         //console.log(table);
-        if (algo == 'dijkstra') {
+        if (algo === 'dijkstra') {
             //console.log('dijkstra\'s search: start = (' + s_i + ', ' + s_j + ')');
             dijkstra(table, maxRow, maxCol, s_i, s_j, e_i, e_j, spMap[this.state.speed]);
         }

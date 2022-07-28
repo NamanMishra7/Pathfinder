@@ -7,7 +7,7 @@ let delay = 10;
 let speed = 10;
 
 function genPath(table, parent, x, y) {
-    if (parent[x][y][0] != -1) {
+    if (parent[x][y][0] !== -1) {
         genPath(table, parent, parent[x][y][0], parent[x][y][1]);
     }
     else {
@@ -51,17 +51,17 @@ function dijkstra(table, maxRow, maxCol, start_i, start_j, end_i, end_j, sp) {
                 continue;
             }
             const status = document.getElementById(`${x}-${y}`).className;
-            if (status == 'wall')
+            if (status === 'wall')
                 continue;
             const weight = getWeight(status);
             if (dis[x][y] > dis[node.element[0]][node.element[1]] + weight) {
-                if (dis[x][y] != inf)
+                if (dis[x][y] !== inf)
                     pq.erase(node);
                 dis[x][y] = dis[node.element[0]][node.element[1]] + weight;
                 pq.enqueue([x, y], dis[x][y]);
                 parent[x][y][0] = node.element[0];
                 parent[x][y][1] = node.element[1];
-                if (x == end_i && y == end_j) {
+                if (x === end_i && y === end_j) {
                     flag = true;
                     break;
                 }
