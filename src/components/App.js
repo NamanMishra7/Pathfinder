@@ -54,7 +54,7 @@ class App extends React.Component {
                 }
             }
         }
-        else if (type == 'clear-path') {
+        else if (type === 'clear-path') {
             const table = this.state.table;
             for (let i = 0; i < this.state.maxRow; i++) {
                 for (let j = 0; j < this.state.maxCol; j++) {
@@ -73,9 +73,7 @@ class App extends React.Component {
 
     handleMazeSelect(maze) {
         const table = this.state.table.slice();
-        const maxRow = this.state.maxRow;
-        const maxCol = this.state.maxCol;
-        if (maze == 'RecursiveDivision')
+        if (maze === 'RecursiveDivision')
             RecursiveDivision(table, spMap[this.state.speed]*2);
     }
 
