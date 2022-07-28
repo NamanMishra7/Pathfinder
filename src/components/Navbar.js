@@ -32,7 +32,7 @@ class Navbar extends React.Component {
                     </li>
                     <li id="maze-select-dropdown" className="nav-item dropdown">
                     <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink-maze" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Mazes & Pattern
+                            Mazes/Pattern
                         </a>
                         <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink-maze">
                             <a className="dropdown-item" onClick={() => this.props.handleMazeSelect('RecursiveDivision')} href="#">Recursive Division</a>

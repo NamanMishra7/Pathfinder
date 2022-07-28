@@ -77,10 +77,6 @@ function dijkstra(table, maxRow, maxCol, start_i, start_j, end_i, end_j, sp) {
         genPath(table, parent, parent[end_i][end_j][0], parent[end_i][end_j][1]);
 }
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 function getWeight(node_type) {
     switch (node_type) {
         case 'wall':
