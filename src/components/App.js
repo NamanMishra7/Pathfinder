@@ -4,7 +4,6 @@ import MainGrid from "./MainGrid";
 import dijkstra from "../algorithms/dijkstra";
 import aStar from "../algorithms/astar";
 import RecursiveDivision from "../algorithms/RecursiveDivision";
-import { tab } from "@testing-library/user-event/dist/tab";
 
 const spMap = {'Fast': 25, 'Medium': 100, 'Slow': 200};
 
