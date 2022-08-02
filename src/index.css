@@ -22,7 +22,6 @@ body {
     position: relative;
     font-size: 16px;
     min-height: 53px;
-    margin-bottom: 30px;
     border: none;
     border-radius: 0px;
     background-color: #34495e;
@@ -99,6 +98,26 @@ a:hover {
     transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
 }
 
+.legend {
+    position: relative;
+    background-color: white;
+    color: black;
+    height: 50px;
+    display: block;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.legend-items {
+    float: left;
+    padding-top: 18px;
+    padding-left: 11px;
+    padding-right: 11px;
+}
+
+#algo-name {
+    width: 350px;
+}
+
 td {
     width: 25px;
     height: 25px;
@@ -144,23 +163,24 @@ td {
     animation-play-state: running;
 }
 
-@keyframes startAnimation {
+@keyframes specialAnimation {
     0% {
         transform: scale(.3);
-        background-color: rgb(17, 255, 0);
     }
     50% {
         transform: scale(1.2);
-        background-color: rgb(17, 255, 0);
     }
     100% {
         transform: scale(1.0);
-        background-color: rgb(17, 255, 0);
     }
 }
 
 .start {
-    animation-name: startAnimation;
+    background-image: url('./res/start.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    animation-name: specialAnimation;
     animation-duration: 0.3s;
     animation-timing-function: ease-out;
     animation-delay: 0;
@@ -170,24 +190,75 @@ td {
     animation-play-state: running;
 }
 
-@keyframes endAnimation {
-    0% {
-        transform: scale(.3);
-        background-color: rgb(135, 6, 6);
-    }
-    50% {
-        transform: scale(1.2);
-        background-color: rgb(135, 6, 6);
-    }
-    100% {
-        transform: scale(1.0);
-        background-color: rgb(135, 6, 6);
-    }
+.startTransparent {
+    background-image: url('./res/start.png');
+    background-color: rgb(255, 254, 106);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    animation-name: specialAnimation;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+.startVisited {
+    background-image: url('./res/start.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    animation-name: visitedAnimation;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
 }
 
 .end {
-    animation-name: endAnimation;
+    animation-name: specialAnimation;
+    background-image: url('./res/stop.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
     animation-duration: 0.3s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+.endTransparent {
+    animation-name: specialAnimation;
+    background-image: url('./res/stop.png');
+    background-color: rgb(255, 254, 106);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+.endVisited {
+    background-image: url('./res/stop.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    animation-name: visitedAnimation;
+    animation-duration: 1.5s;
     animation-timing-function: ease-out;
     animation-delay: 0;
     animation-direction: alternate;

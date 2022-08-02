@@ -1,5 +1,6 @@
 import PriorityQueue from "./PriorityQueue";
 import visualizer from "../components/visualizer";
+import getWeight from "./utils";
 
 const inf = 1000000000;
 
@@ -8,14 +9,27 @@ let speed = 10;
 
 let pathspeed = 50;
 
+let nodes_visited = 0;
+let path_length = 0;
+let success = false;
+
 function genPath(table, parent, x, y) {
     if (parent[x][y][0] !== -1) {
         genPath(table, parent, parent[x][y][0], parent[x][y][1]);
     }
     else {
+        table[x][y].status = 'startTransparent';
+        visualizer(x, y, table[x][y].status, delay += pathspeed);
         return;
     }
-    table[x][y].status = 'shortest-path';
+    let status = document.getElementById(`${x}-${y}`).className;
+    if (status === 'end') {
+        table[x][y].status = 'endTransparent';
+    }
+    else {
+        table[x][y].status = 'shortest-path';
+    }
+    path_length++;
     visualizer(x, y, table[x][y].status, delay += pathspeed);
 }
 
@@ -47,6 +61,22 @@ function dijkstra(table, maxRow, maxCol, start_i, start_j, end_i, end_j, sp) {
     let flag = false;
     while (!pq.isEmpty()) {
         let node = pq.dequeue();
+        if (node.element[0] === start_i && node.element[1] === start_j) {
+            table[node.element[0]][node.element[1]].status = 'startVisited';
+            visualizer(node.element[0], node.element[1], table[node.element[0]][node.element[1]].status, delay += speed);
+        }
+        else if (node.element[0] === end_i && node.element[1] === end_j) {
+            flag = true;
+            success = true;
+            table[node.element[0]][node.element[1]].status = 'endVisited';
+            visualizer(node.element[0], node.element[1], table[node.element[0]][node.element[1]].status, delay += speed);
+            break;
+        }
+        else {
+            table[node.element[0]][node.element[1]].status = 'visited';
+            visualizer(node.element[0], node.element[1], table[node.element[0]][node.element[1]].status, delay += speed);
+        }
+        nodes_visited++;
         for (let i = 0; i < 4; i++) {
             let x = node.element[0]+dx[i];
             let y = node.element[1]+dy[i];
@@ -64,32 +94,13 @@ function dijkstra(table, maxRow, maxCol, start_i, start_j, end_i, end_j, sp) {
                 pq.enqueue([x, y], dis[x][y]);
                 parent[x][y][0] = node.element[0];
                 parent[x][y][1] = node.element[1];
-                if (x === end_i && y === end_j) {
-                    flag = true;
-                    break;
-                }
-                table[x][y].status = 'visited';
-                visualizer(x, y, table[x][y].status, delay += speed);
             }
         }
-        if (flag)
-            break;
     }
 
-    if (flag)
-        genPath(table, parent, parent[end_i][end_j][0], parent[end_i][end_j][1]);
-}
-
-function getWeight(node_type) {
-    switch (node_type) {
-        case 'wall':
-            return inf;
-        case 'start':
-        case 'end':
-        case 'unvisited':
-            return 1;
-        default:
-            return inf;
+    if (flag) {
+        genPath(table, parent, end_i, end_j);
+        document.getElementById(`algo-results`).innerHTML = `Result: ${success? 'Path Found!' : 'No Path Found!'} ${nodes_visited} cells visited, Path Length is ${path_length}`;
     }
 }
 

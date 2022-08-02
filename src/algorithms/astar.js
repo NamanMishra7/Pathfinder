@@ -1,11 +1,14 @@
 import visualizer from "../components/visualizer";
 import PriorityQueue from "./PriorityQueue";
+import getWeight from "./utils"
 
 let speed = 10;
 let delay = 10;
 let pathspeed = 50;
 
-const inf = 1000000000;
+let nodes_visited = 0;
+let path_length = 0;
+let success = false;
 
 class cell {
     constructor(parent = null, position = null) {
@@ -34,16 +37,23 @@ function aStar(table, maxRow, maxCol, start_i, start_j, end_i, end_j, sp) {
         //console.log('processing: ' + currentCell.position);
         close_list.push(currentCell);
 
-        if (currentCell.position[0] === endCell.position[0] && currentCell.position[1] === endCell.position[1]) {
+        if (currentCell.position[0] === startCell.position[0] && currentCell.position[1] === startCell.position[1]) {
+            table[currentCell.position[0]][currentCell.position[1]].status = 'startVisited';
+            visualizer(currentCell.position[0], currentCell.position[1], 'startVisited', delay += speed);
+        }
+        else if (currentCell.position[0] === endCell.position[0] && currentCell.position[1] === endCell.position[1]) {
             // generate path
-            genPath(currentCell.parent, table);
+            success = true;
+            table[currentCell.position[0]][currentCell.position[1]].status = 'endVisited';
+            visualizer(currentCell.position[0], currentCell.position[1], 'endVisited', delay += speed);
+            genPath(currentCell, table);
             break;
         }
-
-        if (currentCell.position[0] !== startCell.position[0] || currentCell.position[1] !== startCell.position[1]) {
+        else {
             table[currentCell.position[0]][currentCell.position[1]].status = 'visited';
             visualizer(currentCell.position[0], currentCell.position[1], 'visited', delay += speed);
         }
+        nodes_visited++;
 
         let dx = [-1, 0, 1, 0];
         let dy = [0, 1, 0, -1];
@@ -61,7 +71,6 @@ function aStar(table, maxRow, maxCol, start_i, start_j, end_i, end_j, sp) {
             for (let k = 0; k < close_list.length; k++) {
                 if (close_list[k].position[0] === x && close_list[k].position[1] === y) {
                     f = 0;
-                    //console.log(`${x}, ${y} already in closed list`);
                     break;
                 }
             }
@@ -84,33 +93,29 @@ function aStar(table, maxRow, maxCol, start_i, start_j, end_i, end_j, sp) {
             }
         }
     }
+    document.getElementById(`algo-results`).innerHTML = `Result: ${success? 'Path Found!' : 'No Path Found!'} ${nodes_visited} cells visited, Path Length is ${path_length}`;
 }
 
 function genPath(cell, table) {
     let x = cell.position[0];
     let y = cell.position[1];
+    let status = document.getElementById(`${x}-${y}`).className;
     if (cell.parent != null) {
         genPath(cell.parent, table);
     }
     else {
+        table[x][y].status = 'startTransparent';
+        visualizer(x, y, table[x][y].status, delay += pathspeed);
         return;
     }
-    table[x][y].status = 'shortest-path';
+    if (status === 'end') {
+        table[x][y].status = 'endTransparent';
+    }
+    else {
+        table[x][y].status = 'shortest-path';
+    }
+    path_length++;
     visualizer(x, y, table[x][y].status, delay += pathspeed);
 }
-
-function getWeight(node_type) {
-    switch (node_type) {
-        case 'wall':
-            return inf;
-        case 'start':
-        case 'end':
-        case 'unvisited':
-            return 1;
-        default:
-            return inf;
-    }
-}
-
 
 export default aStar;

@@ -22,6 +22,9 @@ class App extends React.Component {
             end_j: 49,
             algo: 'dijkstra',
             speed: 'Fast',
+            success: null,
+            nodes_visited: 0,
+            path_length: 0,
         };
     }
 
@@ -54,6 +57,7 @@ class App extends React.Component {
                     }
                 }
             }
+            document.getElementById(`algo-results`).innerHTML = "";
         }
         else if (type === 'clear-path') {
             const table = this.state.table;
@@ -66,6 +70,7 @@ class App extends React.Component {
                     }
                 }
             }
+            document.getElementById(`algo-results`).innerHTML = "";
             this.setState({
                 table: table,
             });
@@ -116,13 +121,14 @@ class App extends React.Component {
 
     runAlgo() {
         const algo = this.state.algo;
-        const table = this.state.table.slice();
+        const table = this.state.table.slice(0);
         const maxRow = this.state.maxRow;
         const maxCol = this.state.maxCol;
         const s_i = this.state.start_i;
         const s_j = this.state.start_j;
         const e_i = this.state.end_i;
         const e_j = this.state.end_j;
+
         //console.log(table);
         if (algo === 'dijkstra') {
             //console.log('dijkstra\'s search: start = (' + s_i + ', ' + s_j + ')');
@@ -137,6 +143,9 @@ class App extends React.Component {
         const row = this.state.maxRow;
         const col = this.state.maxCol;
         const table = this.state.table;
+        const data = {
+            algo: this.state.algo,
+        };
         return (
             <div>
                 <Navbar 
@@ -149,6 +158,7 @@ class App extends React.Component {
                     handleSpeed={(type) => this.handleSpeed(type)}
                 />
                 <MainGrid 
+                    consoleData={data}
                     maxRow={row} 
                     maxCol={col} 
                     table={table} 
