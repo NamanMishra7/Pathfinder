@@ -68,6 +68,14 @@ class App extends React.Component {
                         document.getElementById(`${i}-${j}`).className = 'unvisited';
                         table[i][j].status = 'unvisited';
                     }
+                    else if (node === 'startVisited' || node === 'startTransparent') {
+                        document.getElementById(`${i}-${j}`).className = 'start';
+                        table[i][j].status = 'start';
+                    }
+                    else if (node === 'endVisited' || node === 'endTransparent') {
+                        document.getElementById(`${i}-${j}`).className = 'end';
+                        table[i][j].status = 'end';
+                    }
                 }
             }
             document.getElementById(`algo-results`).innerHTML = "";
