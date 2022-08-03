@@ -4,6 +4,7 @@ import MainGrid from "./MainGrid";
 import dijkstra from "../algorithms/dijkstra";
 import aStar from "../algorithms/astar";
 import RecursiveDivision from "../algorithms/RecursiveDivision";
+import RandomMaze from "../algorithms/RandomMaze";
 
 const spMap = {'Fast': 25, 'Medium': 100, 'Slow': 200};
 
@@ -35,6 +36,10 @@ class App extends React.Component {
     }
 
     resetBoard(type) {
+        var id = window.setTimeout(function() {}, 0);
+        while (id--) {
+            window.clearTimeout(id);
+        }
         if (type === 'reset') {
             const table = createArray(this.state.maxRow, this.state.maxCol);
             this.setState({
@@ -89,6 +94,8 @@ class App extends React.Component {
         const table = this.state.table.slice();
         if (maze === 'RecursiveDivision')
             RecursiveDivision(table);
+        else if (maze === 'RandomMaze')
+            RandomMaze(table);
     }
 
     handleAlgoSelect(func) {
@@ -137,14 +144,19 @@ class App extends React.Component {
         const e_i = this.state.end_i;
         const e_j = this.state.end_j;
 
+        let success = false;
+        let nodes_visited = 0;
+        let path_length = 0;
         //console.log(table);
         if (algo === 'dijkstra') {
             //console.log('dijkstra\'s search: start = (' + s_i + ', ' + s_j + ')');
-            dijkstra(table, maxRow, maxCol, s_i, s_j, e_i, e_j, spMap[this.state.speed]);
+            [success, nodes_visited, path_length] = dijkstra(table, maxRow, maxCol, s_i, s_j, e_i, e_j, spMap[this.state.speed]);
         }
         else if (algo === 'a-star') {
-            aStar(table, maxRow, maxCol, s_i, s_j, e_i, e_j, spMap[this.state.speed]);
+            [success, nodes_visited, path_length] = aStar(table, maxRow, maxCol, s_i, s_j, e_i, e_j, spMap[this.state.speed]);
         }
+
+        document.getElementById(`algo-results`).innerHTML = `<b>Result:</b> ${success? 'Path Found!' : 'No Path Found!'} <span class="visCount">${nodes_visited}</span> cells visited, Path Length is <span class="pathCount">${path_length}</span>!`;
     }
 
     render() {

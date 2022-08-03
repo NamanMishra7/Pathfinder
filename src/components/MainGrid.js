@@ -7,7 +7,7 @@ class MainGrid extends React.Component {
             <div className="MainGrid">
                 <nav className="legend">
                     <div className="legend-items" id="algo-name">
-                        Current Algorithm: {getAlgoName(this.props.consoleData.algo)}
+                        <b>Current Algorithm:</b> {getAlgoName(this.props.consoleData.algo)}
                     </div>
                     <div className="legend-items" id="algo-results">
                         

@@ -1,5 +1,9 @@
 const inf = 1000000000;
 
+function getRand(range) {
+    return Math.floor(Math.random()*range);
+}
+
 function getWeight(node_type) {
     switch (node_type) {
         case 'wall':
@@ -14,4 +18,4 @@ function getWeight(node_type) {
 }
 
 
-export default getWeight;
+export {getRand, getWeight};

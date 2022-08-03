@@ -1,6 +1,6 @@
 import PriorityQueue from "./PriorityQueue";
 import visualizer from "../components/visualizer";
-import getWeight from "./utils";
+import {getWeight} from "./utils";
 
 const inf = 1000000000;
 
@@ -34,8 +34,12 @@ function genPath(table, parent, x, y) {
 }
 
 function dijkstra(table, maxRow, maxCol, start_i, start_j, end_i, end_j, sp) {
+    nodes_visited = 0;
+    path_length = 0;
+    success = false;
     delay = speed = sp;
     pathspeed = 50;
+
     let dis = [];
     let parent = [];
     for (let i = 0; i < maxRow; i++) {
@@ -100,8 +104,8 @@ function dijkstra(table, maxRow, maxCol, start_i, start_j, end_i, end_j, sp) {
 
     if (flag) {
         genPath(table, parent, end_i, end_j);
-        document.getElementById(`algo-results`).innerHTML = `Result: ${success? 'Path Found!' : 'No Path Found!'} ${nodes_visited} cells visited, Path Length is ${path_length}`;
     }
+    return [success, nodes_visited, path_length];
 }
 
 export default dijkstra;

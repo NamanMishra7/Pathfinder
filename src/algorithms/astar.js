@@ -1,6 +1,6 @@
 import visualizer from "../components/visualizer";
 import PriorityQueue from "./PriorityQueue";
-import getWeight from "./utils"
+import {getWeight} from "./utils"
 
 let speed = 10;
 let delay = 10;
@@ -21,6 +21,9 @@ class cell {
 }
 
 function aStar(table, maxRow, maxCol, start_i, start_j, end_i, end_j, sp) {
+    nodes_visited = 0;
+    path_length = 0;
+    success = false;
     speed = delay = sp;
     pathspeed = 50;
 
@@ -93,7 +96,7 @@ function aStar(table, maxRow, maxCol, start_i, start_j, end_i, end_j, sp) {
             }
         }
     }
-    document.getElementById(`algo-results`).innerHTML = `Result: ${success? 'Path Found!' : 'No Path Found!'} ${nodes_visited} cells visited, Path Length is ${path_length}`;
+    return [success, nodes_visited, path_length];
 }
 
 function genPath(cell, table) {
