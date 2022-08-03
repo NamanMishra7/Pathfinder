@@ -38,6 +38,7 @@ class Navbar extends React.Component {
                         <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink-maze">
                             <a className="dropdown-item" onClick={() => this.props.handleMazeSelect('RecursiveDivision')} href="/#">Recursive Division</a>
                             <a className="dropdown-item" onClick={() => this.props.handleMazeSelect('RandomMaze')} href="/#">Random Maze</a>
+                            <a className="dropdown-item" onClick={() => this.props.handleMazeSelect('SlanLines')} href="/#">Slant Lines</a>
                         </div>
                     </li>
                     <li id="start-btn">
@@ -45,6 +46,9 @@ class Navbar extends React.Component {
                     </li>
                     <li id="clear-path-btn" className="nav-item">
                         <a href="/#" className="nav-link" onClick={() => this.props.reset('clear-path')}>Clear Path</a>
+                    </li>
+                    <li id="clear-wall-btn" className="nav-item">
+                        <a href="/#" className="nav-link" onClick={() => this.props.reset('clear-wall')}>Clear Walls</a>
                     </li>
                     <li id="speed-select-dropdown" className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" role="menuitem" href="/#" id="navbarDropdownMenuLink-speed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -5,8 +5,9 @@ import dijkstra from "../algorithms/dijkstra";
 import aStar from "../algorithms/astar";
 import RecursiveDivision from "../algorithms/RecursiveDivision";
 import RandomMaze from "../algorithms/RandomMaze";
+import SlantLines from "../algorithms/SlantLines";
 
-const spMap = {'Fast': 25, 'Medium': 100, 'Slow': 200};
+const spMap = {'Fast': 15, 'Medium': 80, 'Slow': 150};
 
 class App extends React.Component {
     constructor(props) {
@@ -88,14 +89,33 @@ class App extends React.Component {
                 table: table,
             });
         }
+        else if (type === 'clear-wall') {
+            const table = this.state.table;
+            for (let i = 0; i < this.state.maxRow; i++) {
+                for (let j = 0; j < this.state.maxCol; j++) {
+                    const node = document.getElementById(`${i}-${j}`).className;
+                    if (node === 'wall') {
+                        document.getElementById(`${i}-${j}`).className = 'unvisited';
+                        table[i][j].status = 'unvisited';
+                    }
+                }
+            }
+            this.setState({
+                table: table,
+            });
+        }
     }
 
     handleMazeSelect(maze) {
+        this.resetBoard('clear-wall');
+        this.resetBoard('clear-path');
         const table = this.state.table.slice();
         if (maze === 'RecursiveDivision')
             RecursiveDivision(table);
         else if (maze === 'RandomMaze')
             RandomMaze(table);
+        else if (maze === 'SlanLines')
+            SlantLines(table);
     }
 
     handleAlgoSelect(func) {
