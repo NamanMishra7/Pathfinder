@@ -25,6 +25,8 @@ function getAlgoName(name) {
         return "Dijkstra's Search";
     else if (name === 'a-star')
         return "A* Search";
+    else if (name === 'bfs')
+        return "Breadth-First Search";
     return "None";
 }
 

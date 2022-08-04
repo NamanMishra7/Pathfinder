@@ -3,8 +3,10 @@ import Navbar from "./Navbar";
 import MainGrid from "./MainGrid";
 import dijkstra from "../algorithms/dijkstra";
 import aStar from "../algorithms/astar";
+import bfs from "../algorithms/bfs";
 import RecursiveDivision from "../algorithms/RecursiveDivision";
 import RandomMaze from "../algorithms/RandomMaze";
+import RandomWeights from "../algorithms/RandomWeights";
 import SlantLines from "../algorithms/SlantLines";
 
 const spMap = {'Fast': 15, 'Medium': 80, 'Slow': 150};
@@ -74,6 +76,10 @@ class App extends React.Component {
                         document.getElementById(`${i}-${j}`).className = 'unvisited';
                         table[i][j].status = 'unvisited';
                     }
+                    else if (node === 'visited weight' || node === 'shortest-path weight') {
+                        document.getElementById(`${i}-${j}`).className = 'unvisited weight';
+                        table[i][j].status = 'unvisited weight';
+                    }
                     else if (node === 'startVisited' || node === 'startTransparent') {
                         document.getElementById(`${i}-${j}`).className = 'start';
                         table[i][j].status = 'start';
@@ -94,7 +100,7 @@ class App extends React.Component {
             for (let i = 0; i < this.state.maxRow; i++) {
                 for (let j = 0; j < this.state.maxCol; j++) {
                     const node = document.getElementById(`${i}-${j}`).className;
-                    if (node === 'wall') {
+                    if (node === 'wall' || node === 'unvisited weight') {
                         document.getElementById(`${i}-${j}`).className = 'unvisited';
                         table[i][j].status = 'unvisited';
                     }
@@ -116,6 +122,8 @@ class App extends React.Component {
             RandomMaze(table);
         else if (maze === 'SlanLines')
             SlantLines(table);
+        else if (maze === 'RandomWeights')
+            RandomWeights(table);
     }
 
     handleAlgoSelect(func) {
@@ -167,16 +175,22 @@ class App extends React.Component {
         let success = false;
         let nodes_visited = 0;
         let path_length = 0;
+        let cost = [0];
         //console.log(table);
         if (algo === 'dijkstra') {
             //console.log('dijkstra\'s search: start = (' + s_i + ', ' + s_j + ')');
-            [success, nodes_visited, path_length] = dijkstra(table, maxRow, maxCol, s_i, s_j, e_i, e_j, spMap[this.state.speed]);
+            [success, nodes_visited, path_length, cost] = dijkstra(table, maxRow, maxCol, s_i, s_j, e_i, e_j, spMap[this.state.speed]);
         }
         else if (algo === 'a-star') {
-            [success, nodes_visited, path_length] = aStar(table, maxRow, maxCol, s_i, s_j, e_i, e_j, spMap[this.state.speed]);
+            [success, nodes_visited, path_length, cost] = aStar(table, maxRow, maxCol, s_i, s_j, e_i, e_j, spMap[this.state.speed]);
+        }
+        else if (algo === 'bfs') {
+            [success, nodes_visited, path_length, cost] = bfs(table, maxRow, maxCol, s_i, s_j, e_i, e_j, spMap[this.state.speed]);
         }
 
-        document.getElementById(`algo-results`).innerHTML = `<b>Result:</b> ${success? 'Path Found!' : 'No Path Found!'} <span class="visCount">${nodes_visited}</span> cells visited, Path Length is <span class="pathCount">${path_length}</span>!`;
+        document.getElementById(`algo-results`).innerHTML = `<b>Result:</b> ${success? 'Path Found!' : '<span style="color: red;">No Path Found!</span>'}
+         <span class="visCount">${nodes_visited}</span> cells visited, Path Length is <span class="pathCount">${path_length}</span>! and path cost 
+         is <span style="color: #ff4754;">${cost}</span>`;
     }
 
     render() {

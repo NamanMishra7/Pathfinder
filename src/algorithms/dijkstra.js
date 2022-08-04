@@ -11,6 +11,7 @@ let pathspeed = 50;
 
 let nodes_visited = 0;
 let path_length = 0;
+let cost = 0;
 let success = false;
 
 function genPath(table, parent, x, y) {
@@ -26,9 +27,13 @@ function genPath(table, parent, x, y) {
     if (status === 'end') {
         table[x][y].status = 'endTransparent';
     }
+    else if (status === 'unvisited weight') {
+        table[x][y].status = 'shortest-path weight';
+    }
     else {
         table[x][y].status = 'shortest-path';
     }
+    cost += getWeight(status);
     path_length++;
     visualizer(x, y, table[x][y].status, delay += pathspeed);
 }
@@ -76,6 +81,10 @@ function dijkstra(table, maxRow, maxCol, start_i, start_j, end_i, end_j, sp) {
             visualizer(node.element[0], node.element[1], table[node.element[0]][node.element[1]].status, delay += speed);
             break;
         }
+        else if (document.getElementById(`${node.element[0]}-${node.element[1]}`).className === "unvisited weight") {
+            table[node.element[0]][node.element[1]].status = 'visited weight';
+            visualizer(node.element[0], node.element[1], 'visited weight', delay += speed);
+        }
         else {
             table[node.element[0]][node.element[1]].status = 'visited';
             visualizer(node.element[0], node.element[1], table[node.element[0]][node.element[1]].status, delay += speed);
@@ -105,7 +114,7 @@ function dijkstra(table, maxRow, maxCol, start_i, start_j, end_i, end_j, sp) {
     if (flag) {
         genPath(table, parent, end_i, end_j);
     }
-    return [success, nodes_visited, path_length];
+    return [success, nodes_visited, path_length, cost];
 }
 
 export default dijkstra;

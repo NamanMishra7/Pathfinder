@@ -12,6 +12,8 @@ function getWeight(node_type) {
         case 'end':
         case 'unvisited':
             return 1;
+        case 'unvisited weight':
+            return 8;
         default:
             return inf;
     }

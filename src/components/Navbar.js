@@ -20,6 +20,7 @@ class Navbar extends React.Component {
                             <a className="dropdown-item" onClick={() => this.props.handleObjectSelect('unvisited')} href="/#">Empty</a>
                             <a className="dropdown-item" onClick={() => this.props.handleObjectSelect('start')} href="/#">Start</a>
                             <a className="dropdown-item" onClick={() => this.props.handleObjectSelect('end')} href="/#">End</a>
+                            <a className="dropdown-item" onClick={() => this.props.handleObjectSelect('unvisited weight')} href="/#">Weight</a>
                         </div>
                     </li>
                     <li id="algo-select-dropdown" className="nav-item dropdown">
@@ -29,6 +30,7 @@ class Navbar extends React.Component {
                         <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink-algo">
                             <a className="dropdown-item" onClick={() => this.props.handleAlgoSelect('dijkstra')} href="/#">Dijkstra's Search</a>
                             <a className="dropdown-item" onClick={() => this.props.handleAlgoSelect('a-star')} href="/#">A* Search</a>
+                            <a className="dropdown-item" onClick={() => this.props.handleAlgoSelect('bfs')} href="/#">Breadth-First Search</a>
                         </div>
                     </li>
                     <li id="maze-select-dropdown" className="nav-item dropdown">
@@ -37,8 +39,9 @@ class Navbar extends React.Component {
                         </a>
                         <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink-maze">
                             <a className="dropdown-item" onClick={() => this.props.handleMazeSelect('RecursiveDivision')} href="/#">Recursive Division</a>
-                            <a className="dropdown-item" onClick={() => this.props.handleMazeSelect('RandomMaze')} href="/#">Random Maze</a>
                             <a className="dropdown-item" onClick={() => this.props.handleMazeSelect('SlanLines')} href="/#">Slant Lines</a>
+                            <a className="dropdown-item" onClick={() => this.props.handleMazeSelect('RandomMaze')} href="/#">Random Maze</a>
+                            <a className="dropdown-item" onClick={() => this.props.handleMazeSelect('RandomWeights')} href="/#">Random Weights</a>
                         </div>
                     </li>
                     <li id="start-btn">
@@ -48,7 +51,7 @@ class Navbar extends React.Component {
                         <a href="/#" className="nav-link" onClick={() => this.props.reset('clear-path')}>Clear Path</a>
                     </li>
                     <li id="clear-wall-btn" className="nav-item">
-                        <a href="/#" className="nav-link" onClick={() => this.props.reset('clear-wall')}>Clear Walls</a>
+                        <a href="/#" className="nav-link" onClick={() => this.props.reset('clear-wall')}>Clear Walls & Weights</a>
                     </li>
                     <li id="speed-select-dropdown" className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" role="menuitem" href="/#" id="navbarDropdownMenuLink-speed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
