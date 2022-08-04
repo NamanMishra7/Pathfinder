@@ -27,6 +27,8 @@ function getAlgoName(name) {
         return "A* Search";
     else if (name === 'bfs')
         return "Breadth-First Search";
+    else if (name === 'dfs')
+        return "Depth-First Search";
     return "None";
 }
 

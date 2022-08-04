@@ -80,6 +80,10 @@ a:hover {
     color:rgb(41, 101, 175);
 }
 
+.dropdown-item {
+    color: white;
+}
+
 .dropdown:hover {
     color:rgb(55, 141, 246);
 }

@@ -4,6 +4,7 @@ import MainGrid from "./MainGrid";
 import dijkstra from "../algorithms/dijkstra";
 import aStar from "../algorithms/astar";
 import bfs from "../algorithms/bfs";
+import dfs from "../algorithms/dfs";
 import RecursiveDivision from "../algorithms/RecursiveDivision";
 import RandomMaze from "../algorithms/RandomMaze";
 import RandomWeights from "../algorithms/RandomWeights";
@@ -186,6 +187,9 @@ class App extends React.Component {
         }
         else if (algo === 'bfs') {
             [success, nodes_visited, path_length, cost] = bfs(table, maxRow, maxCol, s_i, s_j, e_i, e_j, spMap[this.state.speed]);
+        }
+        else if (algo === 'dfs') {
+            [success, nodes_visited, path_length, cost] = dfs(table, maxRow, maxCol, s_i, s_j, e_i, e_j, spMap[this.state.speed]);
         }
 
         document.getElementById(`algo-results`).innerHTML = `<b>Result:</b> ${success? 'Path Found!' : '<span style="color: red;">No Path Found!</span>'}

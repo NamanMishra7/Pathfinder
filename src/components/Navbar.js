@@ -15,7 +15,7 @@ class Navbar extends React.Component {
                         <a className="nav-link dropdown-toggle" role="menuitem" href="/#" id="navbarDropdownMenuLink-node" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Node
                         </a>
-                        <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink-node">
+                        <div className="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink-node">
                             <a className="dropdown-item" onClick={() => this.props.handleObjectSelect('wall')} href="/#">Wall</a>
                             <a className="dropdown-item" onClick={() => this.props.handleObjectSelect('unvisited')} href="/#">Empty</a>
                             <a className="dropdown-item" onClick={() => this.props.handleObjectSelect('start')} href="/#">Start</a>
@@ -27,17 +27,18 @@ class Navbar extends React.Component {
                         <a className="nav-link dropdown-toggle" role="menuitem" href="/#" id="navbarDropdownMenuLink-algo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Algorithm
                         </a>
-                        <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink-algo">
+                        <div className="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink-algo">
                             <a className="dropdown-item" onClick={() => this.props.handleAlgoSelect('dijkstra')} href="/#">Dijkstra's Search</a>
                             <a className="dropdown-item" onClick={() => this.props.handleAlgoSelect('a-star')} href="/#">A* Search</a>
                             <a className="dropdown-item" onClick={() => this.props.handleAlgoSelect('bfs')} href="/#">Breadth-First Search</a>
+                            <a className="dropdown-item" onClick={() => this.props.handleAlgoSelect('dfs')} href="/#">Depth-First Search</a>
                         </div>
                     </li>
                     <li id="maze-select-dropdown" className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" role="menuitem" href="/#" id="navbarDropdownMenuLink-maze" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Mazes/Pattern
                         </a>
-                        <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink-maze">
+                        <div className="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink-maze">
                             <a className="dropdown-item" onClick={() => this.props.handleMazeSelect('RecursiveDivision')} href="/#">Recursive Division</a>
                             <a className="dropdown-item" onClick={() => this.props.handleMazeSelect('SlanLines')} href="/#">Slant Lines</a>
                             <a className="dropdown-item" onClick={() => this.props.handleMazeSelect('RandomMaze')} href="/#">Random Maze</a>
@@ -57,7 +58,7 @@ class Navbar extends React.Component {
                         <a className="nav-link dropdown-toggle" role="menuitem" href="/#" id="navbarDropdownMenuLink-speed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Speed: {`${this.props.speed}`}
                         </a>
-                        <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink-speed">
+                        <div className="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink-speed">
                             <a className="dropdown-item" onClick={() => this.props.handleSpeed('Fast')} href="/#">Fast</a>
                             <a className="dropdown-item" onClick={() => this.props.handleSpeed('Medium')} href="/#">Medium</a>
                             <a className="dropdown-item" onClick={() => this.props.handleSpeed('Slow')} href="/#">Slow</a>
