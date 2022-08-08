@@ -24,6 +24,7 @@ class cell {
 function aStar(table, maxRow, maxCol, start_i, start_j, end_i, end_j, sp) {
     nodes_visited = 0;
     path_length = 0;
+    cost = 0;
     success = false;
     speed = delay = sp;
     pathspeed = 50;
